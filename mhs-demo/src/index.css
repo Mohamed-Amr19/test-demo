@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --color-brand-emerald: #0A3D2E;
+  --color-brand-navy: #0A1B2A;
+  --color-brand-sand: #D5C29E;
+  --color-brand-gold: #C29B57;
+  --color-brand-cloud: #FAFAFA;
+  --font-en: 'Inter', sans-serif;
+  --font-ar: 'Cairo', sans-serif;
+  --animate-heroZoom: heroZoom 30s ease-out forwards;
+}
+
+@keyframes heroZoom {
+  0% { transform: scale(1); }
+  100% { transform: scale(1.1); }
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  html[dir='ltr'] {
+    font-family: var(--font-en);
+  }
+  html[dir='rtl'] {
+    font-family: var(--font-ar);
+  }
+
+  body {
+    @apply bg-brand-cloud text-brand-navy antialiased overflow-x-hidden;
+  }
+
+  /* Custom scrollbar to look premium */
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-brand-sand/50 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-brand-sand;
+  }
+}

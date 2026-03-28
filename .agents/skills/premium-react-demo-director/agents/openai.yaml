@@ -1,0 +1,5 @@
+interface:
+  display_name: Premium React Demo Director
+  short_description: Turns a business idea or URL into a premium bilingual React website demo through staged approvals.
+  icon: sparkles
+  color: indigo
