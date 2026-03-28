@@ -16,6 +16,12 @@ const ProductShowPage = () => {
 
   if (!product) return <div className="pt-32 text-center text-brand-navy font-bold text-2xl">Product not found</div>;
 
+  const productUrl = typeof window !== 'undefined' ? window.location.href : '';
+  const waMessage = locale === 'ar' 
+    ? `مرحباً، أود الاستفسار عن ${product.name}. رابط المنتج: ${productUrl}` 
+    : `Hello, I would like to inquire about ${product.name}. Product Link: ${productUrl}`;
+  const waLink = `https://wa.me/+201557412975?text=${encodeURIComponent(waMessage)}`;
+
   return (
     <motion.div 
       initial={{ opacity: 0 }}
@@ -82,7 +88,7 @@ const ProductShowPage = () => {
                 transition={{ delay: 0.4 }}
               >
                 <a
-                  href="https://wa.me/+201557412975"
+                  href={waLink}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex items-center justify-center gap-3 bg-brand-emerald text-white px-10 py-5 rounded-sm font-bold text-lg transition-all hover:bg-brand-navy shadow-lg hover:-translate-y-1"
