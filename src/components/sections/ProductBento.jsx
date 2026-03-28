@@ -1,54 +1,101 @@
 import React from 'react';
-import { useLocale } from '../../hooks/useLocale';
 import { Link } from 'react-router-dom';
+import { motion as Motion } from 'framer-motion';
 import { ArrowRight, ArrowLeft } from 'lucide-react';
+import { useLocale } from '../../hooks/useLocale';
 
 const ProductBento = () => {
   const { t, locale } = useLocale();
   const ArrowIcon = locale === 'ar' ? ArrowLeft : ArrowRight;
 
-  const images = {
-    livestock: "https://mhsgroup-export.com/wp-content/uploads/2024/06/Downloader.la-6678408b67e82-1-1024x683.jpg",
-    meat: "https://mhsgroup-export.com/wp-content/uploads/2024/06/Downloader.la-66786770ba11e-1-1024x683.jpg",
-    produce: "https://mhsgroup-export.com/wp-content/uploads/2024/06/Downloader.la-6678df7f7d8db-1-1024x683.jpg"
-  };
-
   return (
-    <section className="py-24 bg-gray-50 border-t border-gray-100">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="mb-16 flex flex-col md:flex-row md:items-end justify-between gap-6">
-          <div>
-            <h2 className="text-sm font-bold tracking-widest text-brand-emerald uppercase mb-2">{t.products.title}</h2>
-            <h3 className="text-3xl md:text-5xl font-bold text-brand-navy max-w-2xl">{t.products.subtitle}</h3>
+    <section className="bg-white py-24 md:py-32">
+      <div className="section-shell">
+        <div className="grid gap-10 border-b border-brand-navy/10 pb-10 md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+          <div className="max-w-3xl">
+            <div className="eyebrow mb-3">{t.products.title}</div>
+            <h2 className="text-4xl font-extrabold leading-[1.02] tracking-[-0.04em] text-brand-navy md:text-5xl">
+              {t.products.subtitle}
+            </h2>
+            <p className="mt-5 max-w-2xl text-lg leading-relaxed text-brand-ink/72">{t.products.overviewText}</p>
           </div>
-          <Link to="/products" className="group flex items-center gap-2 font-bold text-brand-emerald hover:text-brand-navy transition-colors">
-            View All Catalogs
-            <ArrowIcon className="w-4 h-4 group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1" />
+          <Link
+            to="/products"
+            className="group inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.24em] text-brand-emerald transition-colors hover:text-brand-navy"
+          >
+            {t.products.browseLabel}
+            <ArrowIcon className="h-4 w-4 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
           </Link>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {t.products.items.map((item) => (
-            <Link to={`/products/${item.id}`} key={item.id} className="group block relative h-[400px] overflow-hidden rounded-sm bg-brand-navy">
-              <img
-                src={images[item.id]}
-                alt={item.name}
-                className="absolute inset-0 w-full h-full object-cover opacity-70 group-hover:opacity-90 group-hover:scale-105 transition-all duration-700 ease-out"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
-              <div className="absolute inset-0 flex flex-col justify-end p-8">
-                <span className="inline-block px-3 py-1 rounded-sm bg-brand-sand/20 backdrop-blur-md text-brand-sand text-xs font-bold tracking-wider mb-4 w-max">
-                  {item.origin}
-                </span>
-                <h4 className="text-2xl font-bold text-white mb-2">{item.name}</h4>
-                <p className="text-gray-300 text-sm leading-relaxed mb-6 opacity-0 group-hover:opacity-100 transform translate-y-4 group-hover:translate-y-0 transition-all duration-500 ease-out">
-                  {item.desc}
-                </p>
-                <div className="flex items-center gap-2 text-brand-emerald font-bold text-sm">
-                   Explore <ArrowIcon className="w-4 h-4" />
+        <div className="mt-12 space-y-20">
+          {t.products.items.map((item, index) => (
+            <Motion.article
+              key={item.id}
+              initial={{ opacity: 0, y: 36 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: '-100px' }}
+              transition={{ duration: 0.75, delay: index * 0.08, ease: [0.22, 1, 0.36, 1] }}
+              className="grid gap-8 lg:grid-cols-12 lg:items-end"
+            >
+              <Link
+                to={`/products/${item.id}`}
+                className={`group block overflow-hidden lg:col-span-7 ${index % 2 === 1 ? 'lg:order-2' : ''}`}
+              >
+                <div className="relative h-[420px] overflow-hidden rounded-[1.8rem] bg-brand-navy md:h-[520px]">
+                  <img
+                    src={item.image}
+                    alt={item.name}
+                    className="h-full w-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+                  />
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/12 to-transparent" />
+                  <div className="absolute inset-x-0 bottom-0 p-8 md:p-10">
+                    <div className="text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-brand-sand">
+                      {item.eyebrow}
+                    </div>
+                    <div className="mt-3 text-3xl font-extrabold tracking-[-0.04em] text-white md:text-4xl">
+                      {item.name}
+                    </div>
+                  </div>
                 </div>
+              </Link>
+
+              <div className={`lg:col-span-5 ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
+                <div className="text-sm font-semibold uppercase tracking-[0.26em] text-brand-emerald">{item.origin}</div>
+                <h3 className="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.04em] text-brand-navy md:text-4xl">
+                  {item.story}
+                </h3>
+                <p className="mt-5 max-w-xl text-lg leading-relaxed text-brand-ink/72">{item.desc}</p>
+
+                <div className="mt-8 space-y-3">
+                  {item.highlights.map((highlight) => (
+                    <div key={highlight} className="flex items-start gap-3 text-base text-brand-ink/76">
+                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-brand-emerald" />
+                      <span>{highlight}</span>
+                    </div>
+                  ))}
+                </div>
+
+                <div className="mt-8 grid gap-4 border-t border-brand-navy/10 pt-6 sm:grid-cols-2">
+                  {item.stats.map((stat) => (
+                    <div key={stat.label}>
+                      <div className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-brand-emerald">
+                        {stat.label}
+                      </div>
+                      <div className="mt-2 text-lg font-semibold text-brand-navy">{stat.value}</div>
+                    </div>
+                  ))}
+                </div>
+
+                <Link
+                  to={`/products/${item.id}`}
+                  className="group mt-10 inline-flex items-center gap-3 text-sm font-bold uppercase tracking-[0.24em] text-brand-navy transition-colors hover:text-brand-emerald"
+                >
+                  {t.products.browseLabel}
+                  <ArrowIcon className="h-4 w-4 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
+                </Link>
               </div>
-            </Link>
+            </Motion.article>
           ))}
         </div>
       </div>

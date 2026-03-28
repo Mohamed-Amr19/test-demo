@@ -1,95 +1,87 @@
 import React from 'react';
-import { motion } from 'framer-motion';
-import { MapPin } from 'lucide-react';
+import { motion as Motion } from 'framer-motion';
+import { ArrowRightLeft, MapPin } from 'lucide-react';
 import { useLocale } from '../../hooks/useLocale';
 
 const GlobalFootprint = () => {
-  const { t } = useLocale();
+  const { t, locale } = useLocale();
+  const labels =
+    locale === 'ar'
+      ? { origin: 'محور المنشأ', lane: 'خط الوجهة' }
+      : { origin: 'Origin hub', lane: 'Destination lane' };
 
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }} 
-      viewport={{ once: true, margin: "-100px" }} 
-      transition={{ duration: 0.6, ease: "easeOut" }}
-      className="bg-brand-navy rounded-sm overflow-hidden text-white shadow-xl"
-    >
-      <div className="grid grid-cols-1 md:grid-cols-2">
-        <div className="p-12 md:p-16 flex flex-col justify-center">
-          <h2 className="text-3xl font-bold mb-6">{t.about.footprintTitle}</h2>
-          <p className="text-gray-300 leading-relaxed text-lg mb-10">
-            {t.about.footprintText}
-          </p>
-          <div className="flex flex-col xl:flex-row gap-8">
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <MapPin className="w-5 h-5 text-brand-emerald" />
-                <span className="font-bold text-xl">{t.contact.sa}</span>
+    <section className="relative overflow-hidden rounded-[2rem] bg-brand-navy text-white">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(216,195,157,0.18),transparent_32%),radial-gradient(circle_at_bottom_right,rgba(15,76,58,0.22),transparent_28%)]" />
+      <div className="relative grid gap-10 px-6 py-12 md:px-10 md:py-16 lg:grid-cols-[minmax(0,0.9fr)_minmax(0,1.1fr)] lg:px-14">
+        <Motion.div
+          initial={{ opacity: 0, y: 28 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-80px' }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          className="max-w-xl"
+        >
+          <div className="eyebrow mb-3 text-brand-sand">{t.footprint.marketsTitle}</div>
+          <h2 className="text-4xl font-extrabold leading-[1.02] tracking-[-0.04em] text-white md:text-5xl">
+            {t.footprint.title}
+          </h2>
+          <p className="mt-5 text-lg leading-relaxed text-white/72">{t.footprint.subtitle}</p>
+
+          <div className="mt-10 grid gap-3 sm:grid-cols-2">
+            {t.footprint.markets.map((market) => (
+              <div
+                key={market}
+                className="border border-white/10 bg-white/[0.05] px-4 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-white/78"
+              >
+                {market}
               </div>
-              <span className="text-brand-sand text-sm block">Livestock & Meat Export Focus</span>
-            </div>
-            <div>
-              <div className="flex items-center gap-2 mb-2">
-                <MapPin className="w-5 h-5 text-brand-emerald" />
-                <span className="font-bold text-xl">{t.contact.egypt}</span>
-              </div>
-              <span className="text-brand-sand text-sm block">Fresh Produce Hub</span>
-            </div>
+            ))}
           </div>
-        </div>
-        
-        {/* Animated Africa Map */}
-        <div className="h-[400px] md:h-[500px] bg-gray-900 relative overflow-hidden flex items-center justify-center">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/8/86/Africa_%28orthographic_projection%29.svg"
-            alt="Map focused on Africa"
-            className="absolute inset-0 w-full h-full object-contain opacity-20 p-4"
-          />
-          <svg className="absolute inset-0 w-full h-full z-10 p-4" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid meet">
-            <motion.path
-              d="M 54,78 Q 80,55 60,28"
-              fill="none"
-              stroke="#10b981"
-              strokeWidth="0.5"
-              strokeDasharray="2 2"
-              initial={{ pathLength: 0 }}
-              whileInView={{ pathLength: 1 }}
-              transition={{ duration: 2.5, ease: "easeInOut" }}
-            />
-            <motion.circle
-              cx="54" cy="78" r="1.5"
-              fill="#10b981"
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              transition={{ delay: 0.5 }}
-            />
-            <motion.circle
-              cx="54" cy="78" r="3"
-              fill="transparent"
-              stroke="#10b981"
-              strokeWidth="0.25"
-              animate={{ scale: [1, 3], opacity: [0.8, 0] }}
-              transition={{ repeat: Infinity, duration: 2 }}
-            />
-            <motion.circle
-              cx="60" cy="28" r="1.5"
-              fill="#10b981"
-              initial={{ scale: 0 }}
-              whileInView={{ scale: 1 }}
-              transition={{ delay: 2.5 }}
-            />
-            <motion.circle
-              cx="60" cy="28" r="3"
-              fill="transparent"
-              stroke="#10b981"
-              strokeWidth="0.25"
-              animate={{ scale: [1, 3], opacity: [0.8, 0] }}
-              transition={{ repeat: Infinity, duration: 2, delay: 2.5 }}
-            />
-          </svg>
+        </Motion.div>
+
+        <div className="space-y-5">
+          {t.footprint.corridors.map((corridor, index) => (
+            <Motion.div
+              key={corridor.from}
+              initial={{ opacity: 0, x: locale === 'ar' ? -30 : 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-80px' }}
+              transition={{ duration: 0.7, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+              className="relative overflow-hidden border border-white/10 bg-white/[0.05] p-6 md:p-8"
+            >
+              <div className="absolute inset-y-0 start-0 w-1 bg-brand-emerald/70" />
+              <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-white/8 text-brand-sand">
+                    <MapPin className="h-5 w-5" />
+                  </div>
+                  <div>
+                    <div className="text-[0.68rem] font-semibold uppercase tracking-[0.3em] text-white/42">
+                      {labels.origin}
+                    </div>
+                    <div className="mt-1 text-2xl font-bold tracking-[-0.03em] text-white">{corridor.from}</div>
+                  </div>
+                </div>
+
+                <div className="hidden h-px flex-1 bg-gradient-to-r from-brand-sand/50 via-brand-sand/15 to-transparent md:block rtl:bg-gradient-to-l" />
+
+                <div className="flex items-center gap-3 md:min-w-[220px]">
+                  <ArrowRightLeft className="h-5 w-5 text-brand-emerald" />
+                  <div>
+                    <div className="text-[0.68rem] font-semibold uppercase tracking-[0.3em] text-white/42">
+                      {labels.lane}
+                    </div>
+                    <div className="mt-1 text-xl font-bold tracking-[-0.03em] text-white">{corridor.to}</div>
+                  </div>
+                </div>
+              </div>
+
+              <p className="mt-5 max-w-2xl text-base leading-relaxed text-white/72">{corridor.note}</p>
+            </Motion.div>
+          ))}
         </div>
       </div>
-    </motion.div>
+    </section>
   );
 };
 

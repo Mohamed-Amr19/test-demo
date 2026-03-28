@@ -6,7 +6,7 @@ import AnimatedRoutes from './AnimatedRoutes';
 function App() {
   return (
     <Router>
-      <div className="min-h-screen flex flex-col font-sans transition-colors duration-300">
+      <div className="min-h-screen flex flex-col transition-colors duration-300">
         <Navbar />
         <main className="flex-grow">
           <AnimatedRoutes />
