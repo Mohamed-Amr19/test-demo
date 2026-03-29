@@ -45,16 +45,15 @@ const ProductIndexPage = () => {
               <h1 className="text-5xl font-extrabold leading-[0.96] tracking-[-0.05em] md:text-6xl">
                 {category.name}
               </h1>
-              <p className="mt-5 max-w-3xl text-xl leading-relaxed text-white/72">{category.story}</p>
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/72">{category.desc}</p>
             </div>
 
             <div className="border-t border-white/12 pt-6 lg:border-t-0 lg:border-s lg:pt-0 lg:ps-8">
               <div className="text-[0.72rem] font-semibold uppercase tracking-[0.32em] text-brand-sand">
                 {category.origin}
               </div>
-              <div className="mt-3 text-lg leading-relaxed text-white/74">{category.desc}</div>
               <div className="mt-6 grid gap-5 border-t border-white/10 pt-6">
-                {category.stats.map((stat) => (
+                {category.stats.slice(0, 1).map((stat) => (
                   <div key={stat.label}>
                     <div className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-white/42">
                       {stat.label}
@@ -71,8 +70,8 @@ const ProductIndexPage = () => {
       <section className="section-shell py-16 md:py-20">
         <div className="grid gap-10 border-b border-brand-navy/10 pb-8 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)]">
           <div className="text-sm font-semibold uppercase tracking-[0.24em] text-brand-emerald">{category.origin}</div>
-          <div className="grid gap-3 sm:grid-cols-3">
-            {category.highlights.map((highlight) => (
+          <div className="grid gap-3 sm:grid-cols-2">
+            {category.highlights.slice(0, 2).map((highlight) => (
               <div key={highlight} className="border border-brand-navy/10 bg-white/70 px-4 py-4 text-sm leading-relaxed text-brand-ink/72">
                 {highlight}
               </div>
@@ -109,11 +108,11 @@ const ProductIndexPage = () => {
                     >
                       {product.name}
                     </Motion.h2>
-                    <p className="mt-4 max-w-2xl text-lg leading-relaxed text-brand-ink/72">{product.lead}</p>
+                    <p className="mt-4 max-w-xl text-lg leading-relaxed text-brand-ink/72">{product.desc}</p>
                   </div>
 
-                  <div className="mt-7 grid gap-4 sm:grid-cols-2">
-                    {product.details.slice(0, 2).map((detail) => (
+                  <div className="mt-7 grid gap-4 sm:grid-cols-1">
+                    {product.details.slice(0, 1).map((detail) => (
                       <div key={detail.label}>
                         <div className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-brand-emerald">
                           {detail.label}

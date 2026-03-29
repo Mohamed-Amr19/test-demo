@@ -30,7 +30,7 @@ const CinematicHero = () => {
       </div>
 
       <div className="relative z-20 flex min-h-[100svh] flex-col pt-28">
-        <div className="section-shell flex flex-1 items-center py-14 md:py-18">
+        <div className="section-shell flex flex-1 items-center pb-22 md:pb-28">
           <div className="grid w-full gap-14 lg:grid-cols-[minmax(0,1.2fr)_minmax(280px,360px)] lg:items-end">
             <div className="max-w-4xl">
               <Motion.div
@@ -48,20 +48,11 @@ const CinematicHero = () => {
                 </h1>
               </Motion.div>
 
-              <Motion.p
-                initial={{ opacity: 0, y: 28 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ ...heroTransition, delay: 0.1 }}
-                className="max-w-2xl text-lg leading-relaxed text-white/76 md:text-xl"
-              >
-                {t.hero.subheadline}
-              </Motion.p>
-
               <Motion.div
                 initial={{ opacity: 0, y: 28 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ ...heroTransition, delay: 0.18 }}
-                className="mt-10 flex flex-col gap-4 sm:flex-row"
+                className="mt-8 flex flex-col gap-4 sm:flex-row"
               >
                 <Link
                   to="/contact"
@@ -89,7 +80,7 @@ const CinematicHero = () => {
                 {t.hero.corridorTitle}
               </div>
               <div className="space-y-5">
-                {t.hero.corridor.map((item) => (
+                {t.hero.corridor.slice(0, 2).map((item) => (
                   <div key={item.label} className="border-b border-white/10 pb-5 last:border-b-0 last:pb-0">
                     <div className="text-[0.7rem] font-semibold uppercase tracking-[0.28em] text-white/42">
                       {item.label}
@@ -113,7 +104,7 @@ const CinematicHero = () => {
                 {t.hero.manifestTitle}
               </div>
               <div className="space-y-3">
-                {t.hero.manifest.map((item) => (
+                {t.hero.manifest.slice(0, 2).map((item) => (
                   <div key={item} className="flex items-start gap-3 text-sm text-white/78 md:text-base">
                     <span className="mt-2 h-1.5 w-1.5 rounded-full bg-brand-emerald" />
                     <span>{item}</span>

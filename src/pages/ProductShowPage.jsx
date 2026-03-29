@@ -20,24 +20,24 @@ const ProductShowPage = () => {
 
   const labels = locale === 'ar'
     ? {
-        back: `الرجوع إلى ${category.name}`,
-        assurances: 'ضمانات التشغيل',
-        fit: 'مناسب لـ',
-        sourcing: 'ملاحظة التوريد',
-        inquiry: 'استفسار مباشر',
-        inquiryText: 'أرسل السوق المستهدف والكمية المطلوبة وتوقيت الشحن التقريبي. سيصلك رد سريع من الفريق التجاري.',
-        callout: 'جاهز لطلبات الجملة وبرامج التوريد المتكررة',
-      }
+      back: `الرجوع إلى ${category.name}`,
+      assurances: 'ضمانات التشغيل',
+      fit: 'مناسب لـ',
+      sourcing: 'ملاحظة التوريد',
+      inquiry: 'استفسار مباشر',
+      inquiryText: 'أرسل السوق المستهدف والكمية المطلوبة وتوقيت الشحن التقريبي. سيصلك رد سريع من الفريق التجاري.',
+      callout: 'جاهز لطلبات الجملة وبرامج التوريد المتكررة',
+    }
     : {
-        back: `Back to ${category.name}`,
-        assurances: 'Operating assurances',
-        fit: 'Best suited for',
-        sourcing: 'Sourcing note',
-        inquiry: 'Direct inquiry',
-        inquiryText:
-          'Share destination market, target volume, and shipping window. The commercial team can respond with the right routing context quickly.',
-        callout: 'Built for wholesale orders and repeat supply programs',
-      };
+      back: `Back to ${category.name}`,
+      assurances: 'Operating assurances',
+      fit: 'Best suited for',
+      sourcing: 'Sourcing note',
+      inquiry: 'Direct inquiry',
+      inquiryText:
+        'Share destination market, target volume, and shipping window. The commercial team can respond with the right routing context quickly.',
+      callout: 'Built for wholesale orders and repeat supply programs',
+    };
 
   const productUrl = typeof window !== 'undefined' ? window.location.href : '';
   const waMessage =
@@ -75,16 +75,15 @@ const ProductShowPage = () => {
               >
                 {product.name}
               </Motion.h1>
-              <p className="mt-5 max-w-3xl text-xl leading-relaxed text-white/74">{product.lead}</p>
+              <p className="mt-5 max-w-2xl text-lg leading-relaxed text-white/74">{product.desc}</p>
             </div>
 
             <div className="border-t border-white/12 pt-6 lg:border-t-0 lg:border-s lg:pt-0 lg:ps-8">
               <div className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-white/42">
                 {category.name}
               </div>
-              <div className="mt-2 text-lg font-semibold text-white">{labels.callout}</div>
               <div className="mt-6 grid gap-5 border-t border-white/10 pt-6">
-                {product.details.slice(0, 2).map((detail) => (
+                {product.details.slice(0, 1).map((detail) => (
                   <div key={detail.label}>
                     <div className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-white/42">
                       {detail.label}
@@ -122,34 +121,21 @@ const ProductShowPage = () => {
               ))}
             </div>
 
-            <div className="mt-10 grid gap-10 border-t border-brand-navy/10 pt-10 lg:grid-cols-[minmax(0,0.95fr)_minmax(0,1.05fr)]">
-              <div>
-                <div className="eyebrow mb-3">{labels.assurances}</div>
-                <div className="space-y-4">
-                  {product.assurances.map((item) => (
-                    <div key={item} className="flex items-start gap-3 text-base leading-relaxed text-brand-ink/74">
-                      <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-emerald" />
-                      <span>{item}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              <div>
-                <div className="eyebrow mb-3">{labels.fit}</div>
-                <div className="space-y-3">
-                  {product.fit.map((item) => (
-                    <div key={item} className="border border-brand-navy/10 bg-white/70 px-4 py-4 text-sm font-semibold uppercase tracking-[0.18em] text-brand-ink/72">
-                      {item}
-                    </div>
-                  ))}
-                </div>
+            <div className="mt-10 border-t border-brand-navy/10 pt-10">
+              <div className="eyebrow mb-3">{labels.assurances}</div>
+              <div className="space-y-4">
+                {product.assurances.slice(0, 2).map((item) => (
+                  <div key={item} className="flex items-start gap-3 text-base leading-relaxed text-brand-ink/74">
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-brand-emerald" />
+                    <span>{item}</span>
+                  </div>
+                ))}
               </div>
             </div>
 
             <div className="mt-10 border-t border-brand-navy/10 pt-10">
               <div className="eyebrow mb-3">{labels.sourcing}</div>
-              <p className="max-w-4xl text-2xl font-bold leading-relaxed tracking-[-0.03em] text-brand-navy">
+              <p className="max-w-3xl text-xl font-bold leading-relaxed tracking-[-0.03em] text-brand-navy">
                 {product.sourcingNote}
               </p>
             </div>
@@ -158,15 +144,11 @@ const ProductShowPage = () => {
           <div className="lg:sticky lg:top-28">
             <div className="border border-brand-navy/10 bg-white/85 p-6 shadow-[0_24px_60px_rgba(8,23,36,0.08)] backdrop-blur-sm md:p-8">
               <div className="eyebrow mb-3">{labels.inquiry}</div>
-              <h2 className="text-3xl font-extrabold tracking-[-0.04em] text-brand-navy">
-                {t.contact.quickActionTitle}
-              </h2>
-              <p className="mt-4 text-base leading-relaxed text-brand-ink/72">{labels.inquiryText}</p>
               <a
                 href={waLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="mt-8 inline-flex w-full items-center justify-center gap-3 rounded-full bg-brand-navy px-6 py-4 text-sm font-bold uppercase tracking-[0.22em] text-white transition-all hover:bg-brand-emerald"
+                className="mt-2 inline-flex w-full items-center justify-center gap-3 rounded-full bg-brand-navy px-6 py-4 text-sm font-bold uppercase tracking-[0.22em] text-white transition-all hover:bg-brand-emerald"
               >
                 {t.contact.whatsapp}
               </a>

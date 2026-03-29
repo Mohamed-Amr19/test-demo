@@ -63,21 +63,12 @@ const ProductBento = () => {
               <div className={`lg:col-span-5 ${index % 2 === 1 ? 'lg:order-1' : ''}`}>
                 <div className="text-sm font-semibold uppercase tracking-[0.26em] text-brand-emerald">{item.origin}</div>
                 <h3 className="mt-3 text-3xl font-extrabold leading-tight tracking-[-0.04em] text-brand-navy md:text-4xl">
-                  {item.story}
+                  {item.name}
                 </h3>
                 <p className="mt-5 max-w-xl text-lg leading-relaxed text-brand-ink/72">{item.desc}</p>
 
-                <div className="mt-8 space-y-3">
-                  {item.highlights.map((highlight) => (
-                    <div key={highlight} className="flex items-start gap-3 text-base text-brand-ink/76">
-                      <span className="mt-2 h-1.5 w-1.5 rounded-full bg-brand-emerald" />
-                      <span>{highlight}</span>
-                    </div>
-                  ))}
-                </div>
-
                 <div className="mt-8 grid gap-4 border-t border-brand-navy/10 pt-6 sm:grid-cols-2">
-                  {item.stats.map((stat) => (
+                  {item.stats.slice(0, 1).map((stat) => (
                     <div key={stat.label}>
                       <div className="text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-brand-emerald">
                         {stat.label}

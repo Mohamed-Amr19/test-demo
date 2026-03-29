@@ -51,7 +51,6 @@ const AboutPage = () => {
           {t.about.values.map((value) => (
             <div key={value.title} className="border-t border-brand-navy/12 pt-6">
               <div className="eyebrow mb-3">{value.title}</div>
-              <p className="text-lg leading-relaxed text-brand-ink/74">{value.desc}</p>
             </div>
           ))}
         </div>
