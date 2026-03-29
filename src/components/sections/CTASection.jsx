@@ -1,49 +1,38 @@
 import React from 'react';
-import { useLocale } from '../../hooks/useLocale';
-import { motion } from 'framer-motion';
-import { ArrowRight, ArrowLeft } from 'lucide-react';
 import { Link } from 'react-router-dom';
+import { ArrowRight, ArrowLeft } from 'lucide-react';
+import { useLocale } from '../../hooks/useLocale';
 
 const CTASection = () => {
   const { t, locale } = useLocale();
   const ArrowIcon = locale === 'ar' ? ArrowLeft : ArrowRight;
 
   return (
-    <section className="bg-brand-navy py-24 md:py-32 border-t border-brand-emerald/10 relative overflow-hidden">
-      <div className="absolute inset-0 bg-cover bg-center opacity-10" style={{ backgroundImage: "url('https://images.unsplash.com/photo-1588556008151-5e9210eb7b02?auto=format&fit=crop&q=80')" }}></div>
-      <div className="absolute inset-0 bg-gradient-to-t from-brand-navy via-brand-navy/90 to-brand-navy/40"></div>
-      
-      <div className="max-w-4xl mx-auto px-6 text-center relative z-20">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-4xl md:text-5xl font-bold text-white mb-6"
+    <section className="relative overflow-hidden bg-brand-navy py-24 md:py-32">
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,rgba(216,195,157,0.18),transparent_26%),radial-gradient(circle_at_bottom_right,rgba(15,76,58,0.26),transparent_30%)]" />
+      <div className="section-shell relative z-10">
+        <div
+          className="grid gap-10 border border-white/10 bg-white/[0.05] p-8 md:p-12 lg:grid-cols-[minmax(0,1fr)_auto] lg:items-end"
         >
-          {t.ctaSection.title}
-        </motion.h2>
-        <motion.p 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.1 }}
-          className="text-xl md:text-2xl text-gray-300 mb-12 leading-relaxed font-light max-w-3xl mx-auto"
-        >
-          {t.ctaSection.subtitle}
-        </motion.p>
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ delay: 0.2 }}
-        >
-           <Link to="/contact" className="group inline-flex items-center justify-center gap-3 bg-brand-emerald text-white px-10 py-5 rounded-sm font-bold text-lg transition-all hover:bg-white hover:text-brand-emerald shadow-xl hover:-translate-y-1">
-              {t.ctaSection.button}
-              <ArrowIcon className="w-6 h-6 group-hover:translate-x-1 transition-transform rtl:group-hover:-translate-x-1" />
-           </Link>
-        </motion.div>
+          <div className="max-w-3xl">
+            <div className="eyebrow mb-3 text-brand-sand">{t.contact.title}</div>
+            <h2 className="text-4xl font-extrabold leading-[1.02] tracking-[-0.04em] text-white md:text-5xl">
+              {t.ctaSection.title}
+            </h2>
+            <p className="mt-5 text-lg leading-relaxed text-white/72 md:text-xl">{t.ctaSection.subtitle}</p>
+          </div>
+
+          <Link
+            to="/contact"
+            className="group inline-flex items-center justify-center gap-3 rounded-full bg-white px-7 py-4 text-sm font-bold uppercase tracking-[0.24em] text-brand-navy transition-all hover:bg-brand-sand"
+          >
+            {t.ctaSection.button}
+            <ArrowIcon className="h-4 w-4 transition-transform group-hover:translate-x-1 rtl:group-hover:-translate-x-1" />
+          </Link>
+        </div>
       </div>
     </section>
   );
 };
+
 export default CTASection;

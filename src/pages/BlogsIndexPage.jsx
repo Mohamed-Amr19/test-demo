@@ -1,14 +1,14 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLocale } from '../hooks/useLocale';
-import { motion } from 'framer-motion';
+import { motion as Motion } from 'framer-motion';
 import CTASection from '../components/sections/CTASection';
 
 const BlogsIndexPage = () => {
   const { t } = useLocale();
 
   return (
-    <motion.div 
+    <Motion.div
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -23,12 +23,12 @@ const BlogsIndexPage = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
           {t.blogs.items.map(blog => (
             <Link to={`/blogs/${blog.id}`} key={blog.id}>
-              <motion.div 
+              <Motion.div
                 layoutId={`blog-card-${blog.id}`}
                 className="bg-white rounded-sm overflow-hidden shadow-sm hover:shadow-xl transition-all duration-500 border border-transparent hover:border-brand-emerald group flex flex-col h-full"
               >
                 <div className="h-72 overflow-hidden relative">
-                  <motion.img 
+                  <Motion.img
                     layoutId={`blog-image-${blog.id}`}
                     src={blog.img} 
                     alt={blog.title} 
@@ -39,9 +39,9 @@ const BlogsIndexPage = () => {
                   </div>
                 </div>
                 <div className="p-8 md:p-10 flex flex-col flex-grow">
-                  <motion.h2 layoutId={`blog-title-${blog.id}`} className="text-3xl font-bold text-brand-navy mb-4 group-hover:text-brand-emerald transition-colors leading-tight">
+                  <Motion.h2 layoutId={`blog-title-${blog.id}`} className="text-3xl font-bold text-brand-navy mb-4 group-hover:text-brand-emerald transition-colors leading-tight">
                     {blog.title}
-                  </motion.h2>
+                  </Motion.h2>
                   <p className="text-gray-600 text-lg leading-relaxed max-w-none flex-grow mb-8 font-light">
                     {blog.excerpt}
                   </p>
@@ -49,13 +49,13 @@ const BlogsIndexPage = () => {
                     {t.blogs.readMore}
                   </div>
                 </div>
-              </motion.div>
+              </Motion.div>
             </Link>
           ))}
         </div>
       </div>
       <CTASection />
-    </motion.div>
+    </Motion.div>
   );
 };
 export default BlogsIndexPage;

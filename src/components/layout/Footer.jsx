@@ -6,61 +6,79 @@ const Footer = () => {
   const { t } = useLocale();
 
   return (
-    <footer className="bg-brand-navy text-white pt-16 pb-8 border-t-4 border-brand-emerald">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
-          
-          <div className="col-span-1 md:col-span-1">
-            <Link to="/" className="flex items-center gap-2 mb-6">
-              <div className="w-8 h-8 bg-brand-emerald rounded-sm flex items-center justify-center text-white font-bold text-lg">
-                M
+    <footer className="bg-[#07131d] text-white">
+      <div className="section-shell py-14 md:py-18">
+        <div className="grid gap-12 border-b border-white/10 pb-12 md:grid-cols-[minmax(0,1.1fr)_repeat(3,minmax(0,0.7fr))]">
+          <div className="max-w-md">
+            <div className="mb-5 text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-brand-sand">
+              {t.nav.region}
+            </div>
+            <Link to="/" className="inline-flex items-center gap-3">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-brand-sand/35 bg-brand-navy text-sm font-extrabold tracking-[0.18em] text-white">
+                MHS
               </div>
-              <span className="font-bold text-xl tracking-tight text-white">
-                MHS <span className="font-light">Group</span>
-              </span>
+              <div className="text-2xl font-semibold tracking-[0.08em]">MHS Group</div>
             </Link>
-            <p className="text-gray-400 text-sm leading-relaxed max-w-sm">
-              {t.hero.subheadline}
-            </p>
+            <p className="mt-5 text-base leading-relaxed text-white/62">{t.hero.subheadline}</p>
           </div>
 
           <div>
-            <h4 className="font-semibold text-lg mb-6 text-brand-sand">{t.products.title}</h4>
-            <ul className="flex flex-col gap-3 text-sm text-gray-300">
-              {t.products.items.map(item => (
-                <li key={item.id}>
-                  <Link to="/products" className="hover:text-white transition-colors">
-                    {item.name}
-                  </Link>
-                </li>
+            <div className="mb-5 text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-brand-sand">
+              {t.products.title}
+            </div>
+            <div className="space-y-3 text-sm text-white/68">
+              {t.products.items.map((item) => (
+                <Link key={item.id} to={`/products/${item.id}`} className="block transition-colors hover:text-white">
+                  {item.name}
+                </Link>
               ))}
-            </ul>
+            </div>
           </div>
 
           <div>
-            <h4 className="font-semibold text-lg mb-6 text-brand-sand">Company</h4>
-            <ul className="flex flex-col gap-3 text-sm text-gray-300">
-              <li><Link to="/about" className="hover:text-white transition-colors">{t.nav.about}</Link></li>
-              <li><Link to="/contact" className="hover:text-white transition-colors">{t.nav.contact}</Link></li>
-            </ul>
+            <div className="mb-5 text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-brand-sand">
+              {t.nav.about}
+            </div>
+            <div className="space-y-3 text-sm text-white/68">
+              <Link to="/about" className="block transition-colors hover:text-white">
+                {t.nav.about}
+              </Link>
+              <Link to="/blogs" className="block transition-colors hover:text-white">
+                {t.nav.blogs}
+              </Link>
+              <Link to="/contact" className="block transition-colors hover:text-white">
+                {t.nav.contact}
+              </Link>
+            </div>
           </div>
 
           <div>
-            <h4 className="font-semibold text-lg mb-6 text-brand-sand">{t.contact.title}</h4>
-            <p className="text-sm text-gray-300 mb-2">{t.contact.egypt}</p>
-            <p className="text-sm text-brand-emerald font-semibold mb-4">+20 155 741 2975</p>
-            <p className="text-sm text-gray-300 mb-2">{t.contact.sa}</p>
-            <p className="text-sm text-brand-emerald font-semibold">+27 774 540 935</p>
+            <div className="mb-5 text-[0.72rem] font-semibold uppercase tracking-[0.3em] text-brand-sand">
+              {t.contact.title}
+            </div>
+            <div className="space-y-4 text-sm text-white/68">
+              <div>
+                <div>{t.contact.egypt}</div>
+                <div className="mt-1 font-semibold text-white" dir="ltr">
+                  +20 155 741 2975
+                </div>
+              </div>
+              <div>
+                <div>{t.contact.sa}</div>
+                <div className="mt-1 font-semibold text-white" dir="ltr">
+                  +27 774 540 935
+                </div>
+              </div>
+              <div className="font-semibold text-brand-sand" dir="ltr">
+                Info@mhsgroup-export.com
+              </div>
+            </div>
           </div>
-
         </div>
 
-        <div className="pt-8 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500">
-          <p>© {new Date().getFullYear()} MHS Group. All rights reserved.</p>
-          <div className="flex items-center gap-4 mt-4 md:mt-0">
-            <span className="hover:text-white cursor-pointer transition-colors">Privacy Policy</span>
-            <span className="hover:text-white cursor-pointer transition-colors">Terms of Service</span>
-          </div>
+        <div className="flex flex-col gap-4 pt-6 text-xs font-medium uppercase tracking-[0.22em] text-white/36 md:flex-row md:items-center md:justify-between">
+          <div>© {new Date().getFullYear()} MHS Group</div>
+          <div>Cold-chain export programs across Africa</div>
         </div>
       </div>
     </footer>
