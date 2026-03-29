@@ -18,7 +18,7 @@ const CinematicHero = () => {
     <section className="relative min-h-[100svh] overflow-hidden bg-brand-navy text-white">
       <div className="absolute inset-0">
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(216,195,157,0.16),transparent_28%),linear-gradient(110deg,rgba(8,23,36,0.96),rgba(8,23,36,0.78)_46%,rgba(8,23,36,0.48))] z-10" />
-        <div className="absolute inset-y-0 right-0 hidden w-1/2 bg-gradient-to-l from-brand-navy/8 to-transparent lg:block z-10" />
+        <div className="absolute inset-y-0 right-0 hidden w-1/2 bg-gradient-to-l from-brand-navy/2 to-transparent lg:block z-10" />
         <video
           src={heroVideo}
           autoPlay
@@ -70,7 +70,7 @@ const CinematicHero = () => {
               </Motion.div>
             </div>
 
-            <Motion.div
+            {/* <Motion.div
               initial={{ opacity: 0, x: locale === 'ar' ? -24 : 24 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ ...heroTransition, delay: 0.22 }}
@@ -89,7 +89,7 @@ const CinematicHero = () => {
                   </div>
                 ))}
               </div>
-            </Motion.div>
+            </Motion.div> */}
           </div>
         </div>
 
